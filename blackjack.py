@@ -193,9 +193,9 @@ class MAIN(wx.Frame):
         self.player_cards = []
         self.overlay = wx.Overlay()
         # begin wxGlade: MAIN.__init__
-        kwds["style"] = kwds.get("style", 0) | wx.BORDER_SIMPLE | wx.CAPTION | wx.CLIP_CHILDREN | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL
+        kwds["style"] = kwds.get("style", 0)  | wx.CAPTION | wx.CLIP_CHILDREN | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL
         wx.Frame.__init__(self, *args, **kwds)
-        self.SetSize((480, 300))
+        self.SetSize((500, 320))
         
         # Menu Bar
         self.frame_menubar = wx.MenuBar()
@@ -212,7 +212,7 @@ class MAIN(wx.Frame):
         self.panel_3 = wx.Panel(self.panel_1, wx.ID_ANY)
         self.button_1 = wx.Button(self, wx.ID_ANY, _("Hit"), style=wx.BU_AUTODRAW)
         self.button_2 = wx.Button(self, wx.ID_ANY, _("Stand"), style=wx.BU_AUTODRAW)
-        self.button_3 = wx.BitmapButton(self, wx.ID_ANY, wx.Image(resource_path("refresh.png"),wx.BITMAP_TYPE_ANY).ConvertToBitmap(), style=wx.BU_AUTODRAW)
+        self.button_3 = wx.StaticBitmap(self, wx.ID_ANY, wx.Image(resource_path("refresh.png"),wx.BITMAP_TYPE_ANY).ConvertToBitmap(), style=wx.BU_AUTODRAW | wx.NO_BORDER)
         
 
         self.__set_properties()
@@ -220,7 +220,7 @@ class MAIN(wx.Frame):
 
         self.Bind(wx.EVT_BUTTON, self.ON_HIT, self.button_1)
         self.Bind(wx.EVT_BUTTON, self.ON_STAND, self.button_2)
-        self.Bind(wx.EVT_BUTTON, self.ON_RESTART, self.button_3)
+        self.button_3.Bind(wx.EVT_LEFT_DOWN, self.ON_RESTART)
         # end wxGlade
         self.statusbar = self.CreateStatusBar(1)
         self.run()
@@ -235,7 +235,7 @@ class MAIN(wx.Frame):
         self.button_1.Enable(False)
         self.button_2.SetMinSize((50, 32))
         self.button_2.Enable(False)
-        self.button_3.SetMinSize((32, 32))
+        self.button_3.SetMinSize((50, 32))
         # end wxGlade
         
     def __do_layout(self):
