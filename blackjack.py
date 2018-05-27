@@ -118,8 +118,8 @@ class MAIN(wx.Frame):
     def run(self):
         self.button_1.Enable(False) # Disables the buttons if they had perviously been enabled
         self.button_2.Enable(False)
-        self.deck = Card.Build_Deck('standard')# Setup the deck
-        #self.deck = Card.Build_Deck('aces')
+        #self.deck = Card.Build_Deck('standard')# Setup the deck
+        self.deck = Card.Build_Deck('standard')
         shuffle(self.deck)# Shuffle the deck
         self.draw_index = 0# This is the index of the last card that was drawn, the first card being 0
 
@@ -210,14 +210,17 @@ class MAIN(wx.Frame):
         self.panel_1 = wx.Panel(self, wx.ID_ANY)
         self.panel_2 = wx.Panel(self.panel_1, wx.ID_ANY)
         self.panel_3 = wx.Panel(self.panel_1, wx.ID_ANY)
-        self.button_1 = wx.Button(self, wx.ID_ANY, _("Hit"), style=wx.BORDER_NONE | wx.BU_AUTODRAW)
+        self.button_1 = wx.Button(self, wx.ID_ANY, _("Hit"), style=wx.BU_AUTODRAW)
         self.button_2 = wx.Button(self, wx.ID_ANY, _("Stand"), style=wx.BU_AUTODRAW)
+        self.button_3 = wx.BitmapButton(self, wx.ID_ANY, wx.Image(resource_path("refresh.png"),wx.BITMAP_TYPE_ANY).ConvertToBitmap(), style=wx.BU_AUTODRAW)
+        
 
         self.__set_properties()
         self.__do_layout()
 
         self.Bind(wx.EVT_BUTTON, self.ON_HIT, self.button_1)
         self.Bind(wx.EVT_BUTTON, self.ON_STAND, self.button_2)
+        self.Bind(wx.EVT_BUTTON, self.ON_RESTART, self.button_3)
         # end wxGlade
         self.statusbar = self.CreateStatusBar(1)
         self.run()
@@ -228,10 +231,11 @@ class MAIN(wx.Frame):
         _icon = wx.NullIcon
         _icon.CopyFromBitmap(wx.Bitmap(resource_path("A.bmp"), wx.BITMAP_TYPE_ANY))
         self.SetIcon(_icon)
-        self.button_1.SetMinSize((50, 20))
+        self.button_1.SetMinSize((50, 32))
         self.button_1.Enable(False)
-        self.button_2.SetMinSize((50, 20))
+        self.button_2.SetMinSize((50, 32))
         self.button_2.Enable(False)
+        self.button_3.SetMinSize((32, 32))
         # end wxGlade
         
     def __do_layout(self):
@@ -276,6 +280,12 @@ class MAIN(wx.Frame):
         self.dealer_cards.append(wx.StaticBitmap(self.panel_2))
         self.dealer_cards[8].SetBitmap(no_card_img)
         sizer_5.Add(self.dealer_cards[8], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
+        self.dealer_cards.append(wx.StaticBitmap(self.panel_2))
+        self.dealer_cards[9].SetBitmap(no_card_img)
+        sizer_5.Add(self.dealer_cards[9], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
+        self.dealer_cards.append(wx.StaticBitmap(self.panel_2))
+        self.dealer_cards[10].SetBitmap(no_card_img)
+        sizer_5.Add(self.dealer_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
         self.panel_2.SetSizer(sizer_5)
         sizer_3.Add(self.panel_2, 99, wx.BOTTOM | wx.EXPAND | wx.LEFT, 2)
         sizer_2.Add(sizer_3, 1, wx.EXPAND, 0)
@@ -301,6 +311,10 @@ class MAIN(wx.Frame):
         sizer_6.Add(self.player_cards[7], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
         self.player_cards.append(wx.StaticBitmap(self.panel_3, wx.ID_ANY, no_card_img))
         sizer_6.Add(self.player_cards[8], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
+        self.player_cards.append(wx.StaticBitmap(self.panel_3, wx.ID_ANY, no_card_img))
+        sizer_6.Add(self.player_cards[9], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
+        self.player_cards.append(wx.StaticBitmap(self.panel_3, wx.ID_ANY, no_card_img))
+        sizer_6.Add(self.player_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 4)
         self.panel_3.SetSizer(sizer_6)
         sizer_4.Add(self.panel_3, 99, wx.BOTTOM | wx.EXPAND | wx.LEFT, 2)
         sizer_2.Add(sizer_4, 1, wx.EXPAND, 0)
@@ -321,9 +335,10 @@ class MAIN(wx.Frame):
         self.label_4.SetMinSize((50, -1))
         grid_sizer_1.Add(self.label_4, 0, wx.ALIGN_BOTTOM | wx.RIGHT, 0)
         static_line_5 = wx.StaticLine(self, wx.ID_ANY, style=wx.LI_VERTICAL)
-        grid_sizer_1.Add(static_line_5, 0, wx.EXPAND | wx.RIGHT, 20)
-        grid_sizer_1.Add(self.button_1, 0, wx.ALIGN_BOTTOM | wx.RIGHT | wx.FIXED_MINSIZE, 2)
-        grid_sizer_1.Add(self.button_2, 0, wx.ALIGN_BOTTOM | wx.RIGHT | wx.FIXED_MINSIZE, 2)
+        grid_sizer_1.Add(static_line_5, 0, wx.EXPAND | wx.RIGHT, 30)
+        grid_sizer_1.Add(self.button_1, 0, wx.ALIGN_BOTTOM | wx.RIGHT, 2)
+        grid_sizer_1.Add(self.button_2, 0, wx.ALIGN_BOTTOM | wx.RIGHT, 30)
+        grid_sizer_1.Add(self.button_3, 0, wx.ALIGN_BOTTOM | wx.RIGHT, 2)
         sizer_1.Add(grid_sizer_1, 10, 0, 0)
         self.SetSizer(sizer_1)
         self.Layout()
@@ -344,6 +359,9 @@ class MAIN(wx.Frame):
         self.button_1.Enable(False) # Disables the buttons if they had perviously been enabled
         self.button_2.Enable(False)
         self.dealer_draw()
+
+    def ON_NOTHING(self,event):
+        event.Skip() 
 
 # end of class MAIN
 
