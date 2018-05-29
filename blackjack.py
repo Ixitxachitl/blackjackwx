@@ -193,7 +193,7 @@ class MAIN(wx.Frame):
         self.player_cards = []
         self.overlay = wx.Overlay()
         # begin wxGlade: MAIN.__init__
-        kwds["style"] = kwds.get("style", 0)  | wx.CAPTION | wx.CLIP_CHILDREN | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL | wx.HAVE_DPI_INDEPENDENT_PIXELS
+        kwds["style"] = kwds.get("style", 0)  | wx.CAPTION | wx.CLIP_CHILDREN | wx.CLOSE_BOX | wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.TAB_TRAVERSAL
         wx.Frame.__init__(self, *args, **kwds)
         self.SetSize((500, 320))
         
