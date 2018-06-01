@@ -118,8 +118,8 @@ class MAIN(wx.Frame):
     def run(self):
         self.button_1.Enable(False) # Disables the buttons if they had perviously been enabled
         self.button_2.Enable(False)
-        #self.deck = Card.Build_Deck('standard')# Setup the deck
-        self.deck = Card.Build_Deck('standard')
+        self.deck = Card.Build_Deck('standard')# Setup the deck
+        #self.deck = Card.Build_Deck('aces')
         shuffle(self.deck)# Shuffle the deck
         self.draw_index = 0# This is the index of the last card that was drawn, the first card being 0
 
@@ -240,11 +240,11 @@ class MAIN(wx.Frame):
         sizer_3 = wx.BoxSizer(wx.HORIZONTAL)
         sizer_2 = wx.BoxSizer(wx.HORIZONTAL)
         label_1 = wx.StaticText(self, wx.ID_ANY, "Dealer Hand")
-        sizer_2.Add(label_1, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 2)
+        sizer_2.Add(label_1, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT |wx.RIGHT, 2)
         static_line_1 = wx.StaticLine(self, wx.ID_ANY)
-        static_line_1.SetMinSize((400, 2))
-        sizer_2.Add(static_line_1, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 2)
-        sizer_1.Add(sizer_2, 1, 0, 0)
+        static_line_1.SetMinSize((420, 2))
+        sizer_2.Add(static_line_1, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 2)
+        sizer_1.Add(sizer_2, 0, 0, 0)
         
         self.dealer_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_3.Add(self.dealer_cards[0], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
@@ -269,13 +269,13 @@ class MAIN(wx.Frame):
         self.dealer_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_3.Add(self.dealer_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
         
-        sizer_1.Add(sizer_3, 1, wx.EXPAND, 0)
+        sizer_1.Add(sizer_3, 1, wx.ALIGN_CENTER | wx.EXPAND | wx.SHAPED, 0)
         label_2 = wx.StaticText(self, wx.ID_ANY, "Player Hand")
-        sizer_4.Add(label_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 2)
+        sizer_4.Add(label_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 2)
         static_line_2 = wx.StaticLine(self, wx.ID_ANY)
-        static_line_2.SetMinSize((400, 2))
-        sizer_4.Add(static_line_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 2)
-        sizer_1.Add(sizer_4, 1, wx.EXPAND, 0)
+        static_line_2.SetMinSize((420, 2))
+        sizer_4.Add(static_line_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 2)
+        sizer_1.Add(sizer_4, 0, 0, 0)
         
         self.player_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_5.Add(self.player_cards[0], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
@@ -300,7 +300,7 @@ class MAIN(wx.Frame):
         self.player_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_5.Add(self.player_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
         
-        sizer_1.Add(sizer_5, 1, wx.EXPAND, 0)
+        sizer_1.Add(sizer_5, 1, wx.ALIGN_CENTER | wx.EXPAND | wx.SHAPED, 0)
         static_line_5 = wx.StaticLine(self, wx.ID_ANY)
         sizer_1.Add(static_line_5, 0, wx.EXPAND, 0)
         label_3 = wx.StaticText(self, wx.ID_ANY, "Player Score: ")
@@ -320,7 +320,7 @@ class MAIN(wx.Frame):
         sizer_6.Add(self.button_1, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT | wx.ALL, 2)
         sizer_6.Add(self.button_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT | wx.ALL, 2)
         sizer_6.Add(self.button_3, 0, wx.ALIGN_CENTER_VERTICAL | wx.ALIGN_RIGHT | wx.ALL, 2)
-        sizer_1.Add(sizer_6, 1, wx.EXPAND, 0)
+        sizer_1.Add(sizer_6,0, 0, 0)
         self.SetSizer(sizer_1)
         sizer_1.Fit(self)
         self.Layout()
