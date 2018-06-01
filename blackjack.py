@@ -269,7 +269,7 @@ class MAIN(wx.Frame):
         self.dealer_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_3.Add(self.dealer_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
         
-        sizer_1.Add(sizer_3, 1, wx.ALIGN_CENTER | wx.EXPAND | wx.SHAPED, 0)
+        sizer_1.Add(sizer_3, 1, wx.ALIGN_CENTER | wx.EXPAND, 0)
         label_2 = wx.StaticText(self, wx.ID_ANY, "Player Hand")
         sizer_4.Add(label_2, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT | wx.RIGHT, 2)
         static_line_2 = wx.StaticLine(self, wx.ID_ANY)
@@ -300,7 +300,7 @@ class MAIN(wx.Frame):
         self.player_cards.append(wx.StaticBitmap(self, wx.ID_ANY, self.no_card_image))
         sizer_5.Add(self.player_cards[10], 0, wx.ALIGN_CENTER_VERTICAL | wx.ALL, 4)
         
-        sizer_1.Add(sizer_5, 1, wx.ALIGN_CENTER | wx.EXPAND | wx.SHAPED, 0)
+        sizer_1.Add(sizer_5, 1, wx.ALIGN_CENTER | wx.EXPAND, 0)
         static_line_5 = wx.StaticLine(self, wx.ID_ANY)
         sizer_1.Add(static_line_5, 0, wx.EXPAND, 0)
         label_3 = wx.StaticText(self, wx.ID_ANY, "Player Score: ")
