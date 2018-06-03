@@ -79,12 +79,12 @@ class MAIN(wx.Frame):
             for score in range(len(self.player_score)): # Iterate through the list of scores (only multiple if ace was drawn)
                 if self.player_score[score-1] + self.player_hand[len(self.player_hand)-1].value_2 <= 21: # If adding 11 doesn't bust
                     add_score.append(self.player_score[score - 1] + self.player_hand[len(self.player_hand)-1].value_2) # Hold onto any value here
-                if self.player_score[score-1] + self.dealer_hand[len(self.dealer_hand)-1].value_1 <= 21: # If adding 1 doesn't bust (when would it? maths)
+                if self.player_score[score-1] + self.player_hand[len(self.player_hand)-1].value_1 <= 21: # If adding 1 doesn't bust (when would it? maths)
                     self.player_score[score-1] += self.player_hand[len(self.player_hand)-1].value_1 # Add 1
                 else: # And if somehow you added 1 and got 22, I'm not sure if this is possible beyond this point
                     if len(self.player_score) == 1:
                         print("player Bust")
-                        self.statusbar.SetStatusText("You Lose")
+                        self.statusbar.SetStatusText("You Lose ERR:P1`")
                         self.player_score[score-1] += self.player_hand[len(self.player_hand)-1].value_1
                     else:
                         self.player_score.pop(score-1)
